@@ -4,6 +4,7 @@ import 'package:apidemo/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+// comment
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDI();
