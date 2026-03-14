@@ -9,7 +9,8 @@ class UserLoadingState extends UserState {}
 
 class UserLoadedState extends UserState {
   final List<User> users;
-  UserLoadedState(this.users);
+  final bool hasReachedMax;
+  UserLoadedState(this.users, {this.hasReachedMax = false});
 }
 
 class UserErrorState extends UserState {

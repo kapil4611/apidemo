@@ -4,7 +4,6 @@ import 'package:apidemo/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-// comment
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initDI();
@@ -17,9 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => sl<UserBloc>()..add(GetUsersEvent())),
-      ],
+      providers: [BlocProvider(create: (context) => sl<UserBloc>())],
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,

@@ -15,6 +15,21 @@ class _HomeScreenState extends State<HomeScreen> {
   List<User> allUsers = [];
   List<User> filteredUsers = [];
 
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserBloc>().add(GetUsersEvent());
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        context.read<UserBloc>().add(GetUsersEvent());
+      }
+    });
+  }
+
   void filterUsers(String query) {
     if (query.isEmpty) {
       setState(() {
@@ -70,13 +85,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     filteredUsers = filteredUsers.isEmpty
                         ? allUsers
                         : filteredUsers;
-                    if (filteredUsers.isEmpty)
+                    if (filteredUsers.isEmpty) {
                       Center(child: Text("No user..."));
+                    }
                     return ListView.builder(
+                      controller: scrollController,
                       itemCount: filteredUsers.length,
                       itemBuilder: (context, index) {
                         User user = filteredUsers[index];
                         return ListTile(
+                          minTileHeight: 200,
                           onTap: () {
                             Navigator.push(
                               context,
